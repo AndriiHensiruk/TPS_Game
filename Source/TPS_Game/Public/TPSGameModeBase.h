@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "TPSCoreTypes.h"
 #include "TPSGameModeBase.generated.h"
+
+class AAIController;
 
 /**
  * 
