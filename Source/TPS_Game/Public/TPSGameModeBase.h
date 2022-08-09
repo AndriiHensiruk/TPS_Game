@@ -8,7 +8,7 @@
 #include "TPSGameModeBase.generated.h"
 
 class AAIController;
-
+class AProjectile;
 /**
  * 
  */
@@ -33,6 +33,10 @@ protected:
     UPROPERTY(EditDefaultsOnly, Category = "Game")
     FGameData GameDate;
 
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ball")
+    TSubclassOf<AProjectile> ProjectileCllas;
+
 private:
     void SpawnBots();
+    void SpawnBalls();
 };
