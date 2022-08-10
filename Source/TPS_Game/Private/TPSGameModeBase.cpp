@@ -48,18 +48,21 @@ UClass* ATPSGameModeBase::GetDefaultPawnClassForController_Implementation(AContr
 
  void ATPSGameModeBase::SpawnBalls() 
  {
-     float XCoordinate = FMath::FRandRange(-1000.f, 1000.f);
-     float YCoordinate = FMath::FRandRange(-1000.f, 1000.f);
+    
+     for (int32 i = 0; i < GameDate.PlayersNum; ++i)
+     {
+         float XCoordinate = FMath::FRandRange(-1000.f, 1000.f);
+         float YCoordinate = FMath::FRandRange(-1000.f, 1000.f);
+         float Yaw = FMath::FRandRange(0.f, 360.f);
+        
+         FVector Location(XCoordinate, YCoordinate, 300.f);
+         FRotator Rotatoin(0.f, Yaw, 0.f);
+        
 
-     float Yaw = FMath::FRandRange(0.f, 360.f);
-     FVector Location(XCoordinate, YCoordinate, 300.f);
-     FRotator Rotatoin(0.f, Yaw, 0.f);
-     FActorSpawnParameters p;
-     p.Owner = this;
+         const FTransform SpawnTransform(Rotatoin, Location);
+         auto Projectile = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), ProjectileCllas, SpawnTransform);
 
-     const FTransform SpawnTransform(Rotatoin, Location);
-     auto Projectile = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), ProjectileCllas, SpawnTransform);
-
-     UGameplayStatics::FinishSpawningActor(Projectile, SpawnTransform);
+         UGameplayStatics::FinishSpawningActor(Projectile, SpawnTransform);
+     }
 
  }
